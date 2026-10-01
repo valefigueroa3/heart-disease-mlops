@@ -25,4 +25,4 @@ jobs:
         run: flake8 app tests --max-line-length=100 --ignore=E203,W503
 
       - name: Ejecutar pruebas
-        run: pytest -q
+        run: python -m pytest -q
