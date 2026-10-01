@@ -1,0 +1,16 @@
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ipynb_checkpoints/
+.coverage
+htmlcov/
+
+# Datos de entrada y artefactos locales
+data/raw/*.csv
+data/processed/*
+
+# Archivos del sistema operativo
+Thumbs.db
+.DS_Store

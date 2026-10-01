@@ -1,0 +1,8 @@
+-r docker/requirements.txt
+-r requirements-monitoring.txt
+jupyterlab
+matplotlib
+seaborn
+pytest
+httpx
+flake8

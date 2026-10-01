@@ -1,0 +1,28 @@
+name: Validación del proyecto
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  pruebas:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar el repositorio
+        uses: actions/checkout@v4
+
+      - name: Preparar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar dependencias y herramientas de revisión
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r docker/requirements.txt pytest httpx flake8
+
+      - name: Revisar estilo
+        run: flake8 app tests --max-line-length=100 --ignore=E203,W503
+
+      - name: Ejecutar pruebas
+        run: pytest -q
