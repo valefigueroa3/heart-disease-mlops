@@ -120,18 +120,28 @@ docker build -t heart-api:latest -f docker/Dockerfile .
 docker run --rm -p 8000:8000 heart-api:latest
 ~~~
 
-Con Docker, Minikube y kubectl disponibles, desplegar localmente:
+El comando `docker run` mantiene el contenedor en primer plano; se puede detener con `Ctrl + C` antes de probar Kubernetes.
+
+Con Docker Desktop en ejecución, Minikube y kubectl disponibles, iniciar el clúster local y construir la imagen dentro de Minikube:
 
 ~~~powershell
-minikube start
+minikube start --driver=docker
 minikube image build -t heart-api:latest -f docker/Dockerfile .
 kubectl apply -f k8s/deployment.yaml
 kubectl apply -f k8s/service.yaml
-kubectl get pods
-kubectl get services
+kubectl rollout status deployment/heart-model
+kubectl get pods,services
 ~~~
 
-En Windows, el servicio de tipo LoadBalancer puede requerir dejar minikube tunnel activo en otra terminal. El manifiesto define un Deployment con comprobaciones de salud y un Service que expone la API.
+El manifiesto define un Deployment con comprobaciones de salud y un Service de tipo LoadBalancer. Para probar la API sin abrir un túnel, mantener el siguiente comando en ejecución en una terminal:
+
+~~~powershell
+kubectl port-forward service/heart-service 8000:80
+~~~
+
+Con el reenvío activo, la documentación de la API está en [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs) y el estado del servicio en [http://127.0.0.1:8000/health](http://127.0.0.1:8000/health). Detener el reenvío con `Ctrl + C`. En Windows, también se puede obtener una dirección externa para el LoadBalancer ejecutando `minikube tunnel` en otra terminal con permisos de administrador.
+
+La API se verificó desde el clúster: el pod quedó en estado `Running` y `/health` respondió con `status: ok`.
 
 ## Monitoreo de deriva
 
