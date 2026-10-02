@@ -1,5 +1,7 @@
 # Proyecto integrador: ciclo local de MLOps
 
+**Estudiantes:** Rubiel Velásquez y Valentina Figueroa
+
 Este proyecto desarrolla un flujo de aprendizaje automático para clasificar registros del conjunto **Heart Failure Prediction**. Se recorren las etapas solicitadas en el ejercicio: revisión de datos, prevención de fuga de información, comparación y evaluación de modelos, API de predicción, contenedor, manifiestos de Kubernetes, pruebas automáticas y reporte de deriva.
 
 El ejercicio es académico. El modelo no está validado para diagnóstico ni para apoyar decisiones clínicas.
