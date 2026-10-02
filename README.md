@@ -102,6 +102,19 @@ uvicorn app.api:app --reload
 
 La documentación interactiva se abre en [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs) y el estado del servicio en [http://127.0.0.1:8000/health](http://127.0.0.1:8000/health). El endpoint POST /predict espera las variables con nombre para evitar errores por su orden. Se pueden enviar null para presión o colesterol no disponibles.
 
+## Evidencia de ejecución local de la API
+
+Las siguientes capturas documentan la prueba de la API desde Swagger UI mientras el servicio estaba ejecutándose localmente. La solicitud de predicción usa datos ficticios con fines académicos.
+
+- **Comprobación del servicio:** GET `/health` respondió con estado HTTP 200 e indicó que `model.joblib` estaba disponible.
+- **Prueba de predicción:** POST `/predict` respondió con estado HTTP 200. Para los datos de ejemplo, el modelo devolvió una probabilidad de 0.1104, clase predicha 0 y umbral 0.5.
+
+La dirección `127.0.0.1` corresponde al equipo donde se ejecutó la API; estas capturas son evidencia de una ejecución local, no un enlace a un servicio público. El resultado es una demostración académica y no constituye un diagnóstico médico.
+
+![Respuesta exitosa del endpoint de salud GET /health](docs/images/api-health-check.png)
+
+![Solicitud y respuesta exitosa del endpoint POST /predict](docs/images/api-prediction-response.png)
+
 ## Pruebas y estilo
 
 Las pruebas verifican el preprocesamiento y las respuestas de la API:
